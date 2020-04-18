@@ -414,7 +414,7 @@ The Discrete Fourier Series (DFS) is identical except that the $1/N$ is switched
 \rule{\linewidth}{0.25pt}
 
 \begin{minipage}[t]{0.5\textwidth}
-\vspace{0.5em}
+\vspace{0.3em}
 \section{Sampling Theory}
 \tabm $x_s[n] = x(nT_s) = x(t)\rvert_{t = nT_s} %= x(t)\sum_n \delta(t - nT_s)$
 $\\
@@ -446,7 +446,7 @@ Signal Reconstruction from Sinc Interpolation:\\
 
 \end{minipage}%
 \begin{minipage}[t]{0.5\textwidth}
-    \vspace{0.5em}
+    \vspace{0.3em}
     \section{Integrating Factor Method}
     \begin{tabbed}
         $y'+p(x)y=q(x)$\\
@@ -462,6 +462,15 @@ Signal Reconstruction from Sinc Interpolation:\\
     Complex Exponential Representations of Sine and Cosine\\
     \tabm $\ds \cos\theta = \frac{e^{j\theta}+e^{-j\theta}}{2}$\\
     \tabm $\ds \sin\theta = \frac{e^{j\theta}-e^{-j\theta}}{2j}$\\
+    Fast inverse of 2x2 matrix:
+    \[\begin{bmatrix}
+    a & b\\
+    c & d
+    \end{bmatrix} ^{-1} = \frac{1}{ad-bc}
+    \begin{bmatrix}
+    d & -b\\-c & a
+    \end{bmatrix}
+    \]
 \end{minipage}
 \end{minipage}
 
@@ -562,5 +571,23 @@ Signal Reconstruction from Sinc Interpolation:\\
 	\includegraphics[width=0.45\textwidth]{obscanon1}\\
 \end{multicols*}
 
+\newpage
+
+\begin{multicols*}{3}
+\section{Examples}
+
+\subsection{Sampling Example: WW6 Q5}
+A continuous-time signal $x(t) = 3cos(23\pi t) + 3sin(44\pi t) + 4cos(54\pi t + \frac{\pi}{7}$ is sampled at 44 Hertz. Determine the signal $\omega (t)$ reconstructed using an ideal interpolator with sampling rate $T = \frac{1}{44} s$.
+Answer: $\omega (t) = 3cos(23\pi t) + 4cos(-34\pi t + \frac{pi}{7})$\\
+Explanation: First signal has frequency $\frac{23}{2} Hz$, which is less than Nyquist frequency $22 Hz$. Second signal is at Nyquist frequency but is zero at every sample, so disappears. Third signal is aliased in the following way: $\frac{54}{2} Hz = 27 Hz$ base frequency, subtract $44 Hz$ to get $-17 Hz = -34\pi rad \cdot s^{-1}$.
+
+\subsection{Impulse Train Example: WW2 Q6}
+Find the expression that describes the output of the system $y(t)$ for  $0 < t < 9$ when $q=-5$ and the input is $x(t) = \sum_{k=-\infty}^{\infty} \delta (t-9k)$. Let the LTI system be described by $h(t) = e^{qt}u(t)$ where q is a real number.\\
+Solution: As the impulse train is just sampling the exponential at 0, 9, 18... (found by graphical convolution), we get:
+\[y(t) = \sum_{k=0}^{\infty} e^{q(t+9k)} = e^{qt} \sum_{k=0}^{\infty} e^{9qk} = e^{qt} \sum_{k=0}^{\infty} u^k, u=e^{9q}\]
+As the sum is a geometric series, we use geometric series formula to find:
+\[y(t) = e^{qt} \cdot \frac{1}{1-u} = e^{qt} \cdot \frac{1}{1-e^{9q}}\]
+
+\end{multicols*}
 
 \end{document}
